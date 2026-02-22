@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { nanoid } from 'nanoid';
+import { randomUUID } from 'node:crypto';
 import { createOrUpdateProjectSchema } from '../schema/projectSchema';
 import { projectService } from '../services/projectService';
 
@@ -30,7 +30,7 @@ projectRoutes.get('/:id', async (request, response, next) => {
 projectRoutes.post('/', async (request, response, next) => {
   try {
     const parsed = createOrUpdateProjectSchema.parse(request.body);
-    const id = parsed.project.id || nanoid();
+    const id = parsed.project.id || randomUUID();
     const summary = await projectService.upsert(id, parsed.name, {
       ...parsed.project,
       id,

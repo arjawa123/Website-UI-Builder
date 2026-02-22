@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid';
+import { randomUUID } from 'node:crypto';
 import { createOrUpdateProjectSchema } from '../../src/schema/projectSchema';
 import { projectService } from '../../src/services/projectService';
 import { ensureDbReady } from '../_lib/runtime';
@@ -21,7 +21,7 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     if (method === 'POST') {
       const body = parseJsonBody(request);
       const parsed = createOrUpdateProjectSchema.parse(body);
-      const id = parsed.project.id || nanoid();
+      const id = parsed.project.id || randomUUID();
 
       const summary = await projectService.upsert(id, parsed.name, {
         ...parsed.project,
