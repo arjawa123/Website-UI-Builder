@@ -91,7 +91,10 @@ npm run start --workspace server
 
 ## Catatan Deploy
 - Gunakan `DATABASE_URL` Neon pada environment deploy (wajib).
-- Pastikan API di belakang reverse proxy + TLS untuk environment publik.
+- Arsitektur yang direkomendasikan: 2 project Vercel dalam 1 repo.
+- Frontend Vercel: root repo, output `client/dist`.
+- Backend Vercel: set Root Directory ke `server` (pakai Serverless Functions di `server/api`).
+- Set `VITE_API_URL` di frontend ke URL backend Vercel, contoh: `https://your-backend.vercel.app/api`.
 - Disarankan tambah autentikasi jika dipakai multi-user.
 
 ---
