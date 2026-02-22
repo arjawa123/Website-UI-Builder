@@ -1,7 +1,7 @@
 {
   "name": "website-ui-builder",
   "private": true,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "workspaces": [
     "client",
     "server",
